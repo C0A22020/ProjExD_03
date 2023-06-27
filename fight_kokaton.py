@@ -9,6 +9,7 @@ WIDTH = 1600  # ゲームウィンドウの幅
 HEIGHT = 900  # ゲームウィンドウの高さ
 NUM_OF_BOMBS = 5  #爆弾の数
 
+
 def check_bound(obj_rct: pg.Rect) -> tuple[bool, bool]:
     """
     オブジェクトが画面内or画面外を判定し，真理値タプルを返す関数
@@ -167,13 +168,13 @@ def main():
                 time.sleep(1)
                 return
         
-            for i, bomb in enumerate(bombs):
-                if beam is not None:
-                    if bomb.rct.colliderect(beam.rct):
-                        bombs[i] = None
-                        beam = None
-                        bird.change_img(6, screen)
-                        pg.display.update()
+        for i, bomb in enumerate(bombs):
+            if beam is not None:
+                if bomb.rct.colliderect(beam.rct):
+                    bombs[i] = None
+                    beam = None 
+                    bird.change_img(6, screen)
+                    pg.display.update()  
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
@@ -181,7 +182,6 @@ def main():
         for bomb in bombs:
             bomb.update(screen)
         if beam is not None:
-            #ビームがあれば表示
             beam.update(screen)
         pg.display.update()
         tmr += 1
